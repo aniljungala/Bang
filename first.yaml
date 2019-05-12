@@ -1,0 +1,13 @@
+---
+student:
+  - details:
+    name: test
+    phone: 1
+    course: DevOps
+  - details: 
+    name: test2
+    course: AWS
+    phone: 2
+  - details:
+    name: test3
+    phone: 3

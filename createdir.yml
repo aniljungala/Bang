@@ -1,0 +1,30 @@
+---
+- hosts: all
+  tasks:
+  - name: create directory
+    file:
+      path: "/tmp/newdir"
+      state: directory
+      mode: "u=rw, g=wx, o=rwx"
+  - name: create multiful directorys
+    file:
+      path: "{{item}}"
+      state: directory
+    with_items:
+      - '/tmp/dir1'
+      - '/tmp/dir2'
+  - name: remove directory
+    file:
+      path: "/tmp/dir1"
+      state: absent
+  - name: create file
+    file:
+      path: "/tmp/newfile.txt"
+      state: touch
+  - name: content into file
+    copy:
+      dest: "/tmp/newfile.txt"
+      content: 
+        xxx
+        yyy
+

@@ -1,0 +1,43 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+        "Description": "anil-vpc",
+       
+        "Parameters": { 
+        }, 
+        "Resources" : {
+
+            "VPC" : {
+              "Type" : "AWS::EC2::VPC",
+              "Properties" : {
+                "CidrBlock" : "10.0.0.0/16"
+              }
+            },
+        
+            "PublicSubnet1" : {
+              "Type" : "AWS::EC2::Subnet",
+              "Properties" : {
+                "VpcId" : { "Ref" : "VPC" },
+                "CidrBlock" : "10.0.0.0/24",
+                "AvailabilityZone" : { "Fn::Select" : ["0", { "Fn::GetAZs" : { "Ref" : "AWS::Region" } }]},
+              }
+            }, 
+            "InternetGateway" : {
+                "Type" : "AWS::EC2::InternetGateway"
+    
+                }
+              },
+              "GatewayToInternet" : {
+                "Type" : "AWS::EC2::VPCGatewayAttachment",
+                "Properties" : {
+                  "VpcId" : { "Ref" : "VPC" },
+                  "InternetGatewayId" : { "Ref" : "InternetGateway" }
+                }
+             },
+             "PublicRouteTable" : {
+                "Type" : "AWS::EC2::RouteTable",
+                "Properties" : {
+                  "VpcId" : {"Ref" : "VPC"},
+                }
+            }
+        }
+    
