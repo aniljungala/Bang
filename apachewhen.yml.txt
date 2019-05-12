@@ -1,0 +1,86 @@
+ansible_distribution
+
+ansible_os_family
+
+
+---
+- hosts: localhost
+  become: yes
+  tasks:
+  - name: install apache on Redhat server
+    yum:
+      name: httpd
+      state: present
+    when: ansible_os_family == "RedHat" 
+
+
+ansible ip-172-31-24-41.us-west-2.compute.internal -m setup | more
+
+
+---
+- hosts: localhost
+  become: yes
+  tasks:
+  - name: install apache on Redhat server
+    yum:
+      name: httpd
+      state: present
+    when: ansible_os_family == "RedHat"
+  - name: install apache on ubuntu server
+    apt:
+      name: apache2
+      state: present 
+    when: ansible_os_family == "Debian" 
+  - name: print free memory
+    debug:
+      msg: "free memory is {{ansible_memory_mb.real.free}}"
+
+
+
+
+
+---
+- host: localhost
+  become: yes
+  tasks:
+  - name: install {{item}}
+    yum: 
+      name: {{item}}
+    with_items:
+      - git
+      - tree
+      - wget
+
+
+Register
+cat_contents
+tags
+cat_contents_stdmsg
+cat_contents_stderr
+
+templates(jinga2)--dynamic varailbes will be exiecuted(while yaml file exiecution)---configurarion related
+ 
+simplyfy the yaml file into multyful files
+
+roles(ansible-galaxy) sharing roles --gives us a folder stracture
+
+ansible-galaxy init qt.apche
+
+set_fact(varible define in playbook itself not in from var groups)
+
+role consits of logic and any playbook will access the role
+role is simple playbook cated across multiple files they do it for modularity
+
+
+
+paralal exicution is forking(by default 20
+
+ansible all -f 2 -m setup
+
+practice      
+opensource application(openmrs) deploy it
+
+java
+tomcat
+webapps/.war
+mysql

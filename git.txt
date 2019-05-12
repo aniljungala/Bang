@@ -1,0 +1,76 @@
+git checkout -b uat for creation of new branch & moving on to it
+
+git branch uat
+git checkout uat
+
+git push origin uat(origin=remote by default remote server url)
+
+git head ----refers to current looking commit id of that related branch 
+
+git reset --hard(revert the changes)
+
+tagging is nothig but lebeling (do to commit commitid)
+
+git cat-file -t commitid(-t is type)(-s sige) --(-p displys content)
+
+sha1 algorithm---maintains same commit id if diff files  consists same data
+
+all of the changes stored is a tree 
+
+fast forward merge----(if no changes or no commits in other branch merge to master or anybranch)
+
+two diff chnges done in same location--merge conflicts
+
+git init
+
+git add . 
+
+git commit -m "First commit"
+
+git remote add origin remote repository URL
+
+git push origin master
+
+
+git log --oneline
+git log --oneline --graph(command line visuals)
+git clients---tortoise git, source tree
+
+gti pull(git fetch+git merge)--git fetch will pull the latest details from the server--git merge will merge the latest details to the branch ---git pull it connect to the remote it fetch the changes
+
+git tag rel_1.0
+git stash(saved working directry and come back to clear the dir)
+git sash apply
+git stash --list name
+git stash pop(remove stash)
+git cherry-pic cmtid(apply spesific to the any branch)
+
+git rebase brnachname(dis adntnge is can not maintain the histoy which version this branch is created) 
+
+hooks --local hooks and server hooks
+hooking is git actions to something external 
+email hook on post hook(hooks concept taken from svn) 
+cp war file to tomcat webapps---using shellscript or cmtools(ansible or chef
+
+quality gates---sonarqube----static code analysis--code coverage
+whether the build is successful or failure
+
+if you want to break the build go for
+build breakar plugin and sonar cube runner... critical issue(rules..need to pix) ..build fails...(jenkins)
+ 
+only code analysis we can do from maven only
+from maven also setup sonarqube---m2 folder--settings.xml(give sonar qube url) and command mvn sonar:sonar
+
+
+Jfrog artifactory
+delivery pipeline and artifactioy plugin should be install from jenkins
+
+setting.xml into m2 home directory in maven deploy---it wolud deliver failure builds to repository(dis advntage)--
+
+slave---adding no of exicuters--increases exicution power ---slave is jenkins agent--increase capability of jenkins server no need to increase hardware increase exicuters.increse exi not only same machine othe server aswell 
+exicuters---its a task or activity --a command to exicute  
+java web start
+SSH Configuraion these two ways we can configure master slave
+sharing the work accross the machines.(master-slave)
+restict this project where we can run give here label name (In slave wht u have given mostly here gives project names)
+slaves for building diff environments.

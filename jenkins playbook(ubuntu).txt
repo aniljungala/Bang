@@ -1,0 +1,69 @@
+
+
+java > java-1.8.0-openjdk.x86_64 (openjdk-7-jdk)
+
+tomcat7 (yum install tomcat)
+
+http://ftp-chi.osuosl.org/pub/jenkins/war-stable/2.121.2/jenkins.war
+
+
+
+---
+- hosts: appserver
+  become: yes
+  tasks:
+  - name: install openjdk 7
+    apt: 
+      name: openjdk-7-jdk
+      state: present
+  - name: install tomcat 7
+    apt:
+      name: tomcat
+      state: present
+  - name: download jenkins to webapps/
+    apt-key:
+      url: http://ftp-chi.osuosl.org/pub/jenkins/war-stablekeyring/2.121.2/jenkins.war
+      keyring: /usr/share/tomcat/webapps/jenkins.war
+
+  - name: enable and start tomcat
+    service:
+      name: tomcat
+      state: started
+      enabled: yes
+
+
+[appserver]
+ip-172-31-24-41.us-west-2.compute.internal
+
+[local]
+localhost
+
+/home/ansible/PlaybookTests
+
+
+/home/ansible/Hosts/jenkinshosts
+
+ ansible-playbook -i jenkinshosts jenkins.yml
+
+systemctl start tomcat8
+status tomcat
+
+
+/var/lib/tomcat7/webapps/jenkins.war
+
+ansible-playbook -i jenkinshosts jenkins.yml
+
+
+sudo chown -R tomcat7:tomcat7 /var/lib/tomcat7/webapps/
+sudo chmod -R u+rw /var/lib/tomcat7/webapps/
+
+
+vi /var/lib/tomcat8/conf/tomcat-users.xml
+
+<role rolename="manager-gui"/>
+<role rolename="admin-gui"/>
+<role rolename="manager-script"/>
+
+<user username="ansible" password="ansible" roles="manager-gui,admin-gui"/>
+
+/etc/tomcat7/tomcat-users.xml.

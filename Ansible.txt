@@ -1,0 +1,154 @@
+--> shell/batch script
+
+redabuilty maintainbuilty loss
+
+misses consistent state and not easy becuse appplictions might scale as much as possible 
+
+how to do
+
+need to write conditions in script-and install software as many times as
+
+CMTools respsbile to giving suitable environments for an applications to work
+
+--> IAC--Ansible--gurantty give cosistenty state
+
+can be version control system will put it in git 
+
+what to do or what i want 
+
+Idempotency --when you exicute the script many times will give you the same(consistent) result 
+
+It will check the software is installed or not before install the software 
+
+-->push model --Ansible and salt --doesnt required to install agents to commuincate with master to node --inbulit popular mechanism SSH
+
+need to configure user and inbuilt monitoring is not done in this to know the node is alive or not
+
+light wegith --thin componet laptop also can act like control server in ansible(not require quardcore proccer)
+
+node can be any os but master can be linux same in chef also
+
+--> pull model --chef and puppet---required agent to be install     
+
+heavy weight becz every 30 mins communications happens
+
+
+-->change management
+-->provisioning
+-->Automation
+-->orchestration
+
+
+installation
+
+control server(redhat)
+
+--> sudo yum update
+--> sudo yum install epel-release
+-->download it with wet --.rpm file
+-->rpm -i .--rpm
+--> sudo yum install ansible -y
+--> ansible --version
+
+--> sudo -i
+--> adduser ansible
+--> passwd  ansible
+--> visudo(if u woring on amazon only this stpes required)
+--> after root
+     ansible ALL=(ALL)   NOPASSWD: ALL
+
+enabling password
+--> vi /etc/ssh/sshd_config
+--> PasswordAuthentication yes
+--> service sshd restart
+--> exit 
+--> su ansible
+--> cd ~
+-->pwd --/home/ansible/
+
+by defaulut inventory file located in
+> cd /etc/ansible/
+--> less hosts
+go to root directory maintain orginal file(hosts)
+-->root@ip>cd /etc/ansible/  mv hosts hosts.original  
+--> vi hosts
+--> localhost
+--> ansible -m ping all 
+--> yes(asking autheticity)
+ --> su ansible
+--> ansible -m ping all
+--> Authentication required generate a key
+-->  ssh-keygen(dont enter anything afer this click on enter)
+--> ssh-copy-id localhost(machine name)
+--> give password (ansible)
+--> ssh localhost(here there is no need of username and password)
+--> exit
+--> ansible -m ping all (adhoc commond)
+
+node machine(redhat or any liux machine)
+
+-->add ansibel user with sudo previlages
+--> adduser ansible
+--> passwd ansible
+--> visudo
+--> ansible ALL=(ALL)   NOPASSWD: ALL
+
+enabling password
+
+--> vi /etc/ssh/sshd_config
+--> PasswordAuthentication yes
+--> service sshd restart
+
+same network go for private ip because while resatart the machine it does not change the ip
+ --> hostname -f (machine name)
+
+
+
+controlserver
+--> adding the node in inventory file
+--> root@ip>ansible> vi hosts
+--> su ansible
+ 
+copy the generated key to node machine
+
+--> ssh-copy-id nodename(private dnsname)
+
+--> ssh nodename
+--> exit
+--> ansible -m ping all
+
+
+
+
+
+
+ip-172-31-24-41.us-west-2.compute.internal
+
+
+
+
+ansible all -m setup -a | 'filter=ipv4*'
+
+ansible all -m setup -a | 'filter=ansible_default_ipv4_adress'
+
+ansible-playbook all -vv playbook.yml(verbosity[disply log info])
+
+debug module displays the values of system variables
+
+vars:
+
+
+Role is moduler way of writing payblook --splitting plabook into multyful files.
+
+ansible galaxy--> sharing roles
+
+ansible-galaxy init apache-webserver(rolesname)
+
+--defaults>main.yml--
+---tasks>main.yml
+
+
+A template in Ansible is a file which contains all your configuration parameters, but the dynamic values are given as variables. During the playbook execution, depending on the conditions like which cluster you are using, the variables will be replaced with the relevant values
+
+
+

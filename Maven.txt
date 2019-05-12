@@ -1,0 +1,73 @@
+different types of maven plugins
+wt is the sequences in which maven serches the dependence of library 
+wt are the different types of buid profiels
+clin lifecycls of the
+wt is the snapshot in maven
+snapshot b/w version
+project fully qulifie nameified artyfact
+creat backup files in jenkins
+
+
+Maven Plugins are generally used to 
+
+create jar file
+create war file
+compile code files
+unit testing of code
+create project documentation
+create project reports
+
+
+mvn [plugin-name]:[goal-name]
+
+mvn compiler:compile
+
+Build plugins
+
+They execute during the build process and should be configured in the <build/> element of pom.xml.
+
+Reporting plugins
+
+They execute during the site generation process and they should be configured in the <reporting/> element of the pom.xml.
+
+clean
+
+
+Types of Build Profile
+Build profiles are majorly of three types.
+
+Type	        Where it is defined
+Per Project	Defined in the project POM file, pom.xml
+Per User	Defined in Maven settings xml file (%USER_HOME%/.m2/settings.xml)
+Global	Defined in Maven global settings xml file (%M2_HOME%/conf/settings.xml)
+Cleans up target after the build. Deletes the target directory.
+
+compiler
+
+Compiles Java source files.
+
+surefire
+
+Runs the JUnit unit tests. Creates test reports.
+
+jar
+
+Builds a JAR file from the current project.
+
+war
+
+Builds a WAR file from the current project.
+
+javadoc
+
+Generates Javadoc for the project.
+
+antrun
+
+Runs a set of ant tasks from any phase mentioned of the build.
+
+
+
+
+
+

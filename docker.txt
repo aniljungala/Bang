@@ -1,0 +1,148 @@
+
+docker 1.13(latest 18.03/17.06)
+
+docker run -d --name -p 8080:8080 --name detached_jenkins jenkins
+docker attach container_name (get into the container while in container run in detached mode ctrl+Pq exit)
+
+docker exec container_name cat /pathname(to display the content without entering into container)
+
+docker run -d -it myfirstimage:1.0 /bin/bash(-d takes precedence over -it) 
+
+docker attaches only be the exiecutable which hasbeen started(if u want to see wtis happening while execution u can use attach) 
+
+docker exec (docker started with -d will exec recommanded and u can call any executable command) 
+
+docker build -t myjenkins:1.0
+
+docker run -p 8080:8080 myjenkins:1.0
+
+add command---add files from internet and downlowd as well.
+
+copy command-- only added files from host machin to container.
+
+multiple run statems(application with different versions)
+
+Image layer--run statemts create a layer and uses base layer id storagge
+
+DOCKER DOES NOT REPLICATE DATA ANYCAUSE
+
+union file syestem is storage driver of docker
+
+thin read and write layer
+
+difference b/w volume and thin read write layer..
+
+image layer is some thing write on to your disk..when ever your write mount point ur not going via imagelayer it will directly going..
+
+docker volume is persistent data of the container
+
+consume storage --if run statemt content is same then it will not created new imagelayer
+
+data from host machine to container(ex: some shared folder)
+
+image to image
+
+container to contaniner(data only contanier)
+
+
+docker run -it -v /data-mount ubuntu:trusty /bin/bash(backup of container)
+
+docker inspect cid
+ 
+docker run-d -it -v /home/buntu/share:/data-mount ubuntu:trusty /bin/bash(mapping)
+
+docker exec cid ls /data-mount
+
+docker volume create testvol
+
+docker run -v testvol:/d
+
+data only containers is a container dies immediately after starting and it has some volume.
+
+ 
+docker run --name data-only -v /data-mount ubunt:xenial /bin/true(/bin/true which returns true zero)
+
+
+docker run -d -it --volumes-from data-only ubuntu:trusty /bin/bash
+
+docker inspect cid
+
+
+containers reaching to other container via the ip address of it.(dns name required for using machine name)
+
+docker checkpoint--->looks into application status as well with file system export.
+
+docker export--> file system export only.
+
+docker network-->
+
+default network for docker is bridge-0 network which is used to communicate your host machine to container.
+
+bridg network-which is created when first time install the docker itself.
+
+bridge network is used for single host machines.
+
+three pillars of docker native networking is CNM, Libnetwork, Drivers.
+
+CNM--> is like requriment document specification... network req doc specificatiom
+
+Libnework--> implimentation of, CNM application created out of it
+
+Drivers--> specific about to a network ex: wt is the driver which we connect to
+
+driver single host multihost can not be same..
+
+CNM--> three components Sandbox, endpoint, Network
+ 
+Sandbox:> is nothing but network namespaces..(contains full stack implimentaion of ur n/w and it has a isolated space)
+
+
+Endpoint: is nothing but adapter like in linux eth0, eth1
+
+docker network inspect bridge
+
+multihost nework created by natively by using swarm
+
+swarm is native clustering in docker
+
+using swarm we can create overlay network.
+
+single host networking is only for one bdige adpter.
+
+docker network create -d bridge --subnet 10.10.0.0/24 qt-bridge
+
+docker network ls
+
+docker network inspect qt-bridge
+
+docker run --network qt-bridge --name c1 -d -it ubuntu:xenial /bin/bash
+
+docker run --network qt-bridge --name c2 -d -it ubuntu:xenial /bin/bash
+
+doker network inspect qt-bridge
+
+dns resoultion is not presented by default..
+
+dns is the service discovery which is enabled for all the custom network then ping by name also.
+
+multihost networking--> 
+
+VXLAN tunnel(overlay)--> endpoints (VTEP 4798/udp) created on your machine and connected to a sandbox
+
+tunneling happens through underlay.
+
+docker swarm init
+
+exiecute displyd command into other machine
+
+manager and worker
+
+
+enable udp port of 2789, 7946(tcp 2377)
+
+
+
+
+
+
+ 

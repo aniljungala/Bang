@@ -1,0 +1,204 @@
+s3 simple storage service(bilk storage content)
+
+you cant select avzones trys to replicated into all the AVzones
+
+in ec2 will select avzones
+
+bucket properties-
+
+versioning- enable versioning/suspend versioning (you will not deleted automatically once version is enable suspend version over written the latest version)
+
+Logging-
+
+Tags-
+
+Set Permissions- in aws by default (aws account holders) annonymous is public(access control list gives the permiison for only aws account holder not to others)
+
+Manage Public permissions
+
+Manage system Permissions
+
+Management--
+
+upload(files and folder) --> Storage class---> 
+
+Standard (most costliest option)- object durabuilty(probabulity file getting corrupt is 99.99(11 times)(0.001% chance of file lost in a year)
+                                - object avilabuilty(99.99%)
+                                - backedup in every avzones
+
+
+Standard-IA --> obj durability is 99.99(11times) same as standard
+                 
+                obj avaibulity is 99.90%(lees compare with standard)
+
+Reduced redundancy storage-- object durabuilty(99.99%(2 nines))
+                             oject availbulity(99.99%( same as Standard)
+                             not as many backup what standars
+
+Glacier(cheafest option)--obj durabulity(99.99(11times)
+                        -- meant for long term
+                        -- back of kind of thing uses it
+
+
+change storage classes-->
+
+Encryption->  none
+
+Amazon s3 master-key(amazone provided encryption mechanism)
+
+AWS KMS master-key
+
+you dont trust amazon encrypt the data and transfer to amazon(openSSL)
+
+
+D/F actual file system and s3
+
+file system directly will have web interface?(webserver)
+
+S3 is not a file system it is an object storage.(any file its text or video or anyfile we can upload)--blob kind of storage..
+
+ In file system protocal is diffetent(ext/ntfs)
+
+
+In s3 ur not only charge for storing you will also charge for transfer(charg in GB min unit is GB)
+
+Content Delivery N/w
+
+cloud front--
+
+
+object storage details-->
+
+put
+get
+
+size(GB)
+
+
+object life cycle--> change storage classes automatically
+
+glacier we cant use directly will it use obj life cycle
+
+select file or folder > Management > add life cycle rule(rule naeme -file name or foldername)> transition(current/previous versions--Add transition) > expiration
+
+standard and reducedreduncy                         
+
+
+Backup stratagies-->speedy recovery--->incremental/full backup
+
+                  onsite backup-->putting in extarnal harddisk
+                  NAS(Network attached storage)
+
+              --> snowball edge
+ 
+                    offsite backup-->google drive(takes time to move)
+archival-->takes days(contains entire data)
+
+
+
+ec2 instant types (purchasing options):
+
+ charge is based on hours(min unit 1hr)
+
+on demand:creating the machine and delete on time
+
+reserved instances: long term commit
+
+spot:
+
+
+AMI: Pre configured package(os in owr machine)
+
+AWS MarketPlace(might charge for software)
+
+Community AMI not charge for software
+
+AMI's are private(myami) and public
+
+Instance types:
+
+micro instances
+General purpose
+compute optimized
+GPU Graphics
+GPU Compute
+memory optimized
+storageoptimized
+
+
+Elastic block storage: it is a storage volume( hard disk)
+
+EBS has more than 1 harddisk(1 is root vlolume[it contains the os] other additional volume)
+
+IOPS (256kb 1IOPS)--qulality measured in iops
+
+SSD(salid state disk)
+
+Snapshot (copy of the data)
+
+
+Security Groups: specific to a machine
+
+open the ports to specific ip address(ex: 30.30.0.0/16)
+
+NACL: Specific to a network(subnet level)
+
+Route table and internet gateway: stop some traffic getting it
+
+ec2 classic (dec 2013 before)--while restrat public and private ips will change
+
+Insantcestore-- > when machine is delted(storage volume will delete) 
+EBS baked volumes--> after deleting the machine also will have storage volume(externalharddisk)(storage option while creating ec2 delete on termination bydefalut selected)
+
+from snapshot only will create volumes from one region to onther region
+from snapshot machine image cration also possible
+
+we can  attach volumes from other availabuiltyzone in same regions
+
+increase machine volumes without stopping the machine
+
+ebs volume types
+Generalpurpose SSD: root volumes (3iops/gib)(1024kbytes in ssd in non ssd 256kb per second read/write operation can do)
+
+provisioned IPOS: provisiond upto 20iops and will uses in large kind of database
+
+magnetic: chepest among all cannot be measured in iops
+
+
+df-h
+
+fdisk -l(look into files)(dev/xvda location)
+ 
+mkfs -t ext4 dev/xvdf(format creating the file system)
+
+mount dev/xvdf newdir
+
+elastic volume: increase the volume from volumetype(hdisk) to another volume type(gp2[general purpose]increase the size but not decress)
+                ipos--increased aswell decreases also
+
+Route53--> map domainname with aws resources(load balancer)
+loadbalance-->keeps tracks of machines 
+Autoscaling-->increasing and decreasing machines
+
+
+Egress only internetgateways
+DHCP optionset(org uses internal domain naming server which is the option set for dns is host machine name)x
+elastic ips
+peering connection
+
+
+
+
+ECS--
+
+Repository--> images registry
+Cluster--> container insances will declare here
+Task Defination-> Information about the containers
+Services-->balace the tasks using autoscaling instance will be create after the service creation.
+
+classic load balancer-- region wide. layer 4 and 7, TCP, SSL 
+ALb--> layer 7 only supports only https  and http not support with tcp--
+       Health checks and cloudwatch improved
+  supports Path-based routing, Container Support, WebSockets, HTTP/2
+  
+
